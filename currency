@@ -1,0 +1,23 @@
+exchange_rates = {
+    "USD": {"EUR": 0.92, "INR": 83.2},
+    "EUR": {"USD": 1.09, "INR": 90.5},
+    "INR": {"USD": 0.012, "EUR": 0.011}
+}
+
+def convert_currency(amount, from_currency, to_currency):
+    try:
+        rate = exchange_rates[from_currency][to_currency]
+        return amount * rate
+    except KeyError:
+        raise ValueError("Currency not supported or rate not defined.")
+
+# Example usage
+amount = float(input("Enter amount: "))
+from_currency = input("From currency (USD, EUR, INR): ").upper()
+to_currency = input("To currency (USD, EUR, INR): ").upper()
+
+try:
+    result = convert_currency(amount, from_currency, to_currency)
+    print(f"{amount:.2f} {from_currency} = {result:.2f} {to_currency}")
+except ValueError as e:
+    print(f"Error: {e}")
